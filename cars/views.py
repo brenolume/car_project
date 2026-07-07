@@ -1,4 +1,5 @@
 from django.shortcuts import render # funcao do django que renderiza uma resposta HTTP e devolve uma `response`(resposta) para o usuario
+from django.http import HttpResponse
 from cars.models import Car
 
 def cars_view(request): #(request) é obrigatório para qualquer view que solicite uma url no Django
@@ -14,7 +15,7 @@ def cars_view(request): #(request) é obrigatório para qualquer view que solici
     )
 
 def new_car_view(request):
-    return 'Novo Carro'
+    return HttpResponse('Novo Carro')
 
 
 
