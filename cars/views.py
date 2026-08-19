@@ -14,9 +14,6 @@ def cars_view(request): #(request) é obrigatório para qualquer view que solici
         {'cars' : cars}
     )
 
-def new_car_view(request):
-    return HttpResponse('Novo Carro')
-
 
 
 
