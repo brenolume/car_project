@@ -17,7 +17,10 @@ def cars_view(request): # aqui é recebido o request do usuário, e é retornado
     )
 
 def new_cars_view(request):
-    new_car_form = CarForm() # aqui é criado um objeto da classe CarForm, que é responsável por criar o formulário de cadastro de carros, e é armazenado na variável new_car_form.
+    if request.method == 'POST': # aqui é verificado se o método da requisição é POST, caso seja, é criado um objeto da classe CarForm, que é responsável por criar o formulário de cadastro de carros, e é armazenado na variável new_car_form.
+        new_car_form = CarForm(request.POST, request.FILES) # aqui é criado um objeto da classe CarForm, que é responsável por criar o formulário de cadastro de carros, e é armazenado na variável new_car_form.
+    else:
+        new_car_form = CarForm() # aqui é criado um objeto da classe CarForm, que é responsável por criar o formulário de cadastro de carros, e é armazenado na variável new_car_form.
 
     return render(
         request,
