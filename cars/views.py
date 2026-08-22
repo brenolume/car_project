@@ -1,6 +1,6 @@
 from django.http import request
-from django.shortcuts import render # aqui é importado o render do django.shortcuts, que é responsável por renderizar o arquivo html e retornar a resposta para o usuário.
-from cars.forms import CarForm
+from django.shortcuts import render, redirect # aqui é importado o render do django.shortcuts, que é responsável por renderizar o arquivo html e retornar a resposta para o usuário.
+from cars.forms import CarModelForm  # aqui é importado o CarModelForm do arquivo forms.py, que é responsável por criar o formulário de cadastro de carros, e é utilizado para criar o formulário de cadastro de carros.
 from cars.models import Car
 
 def cars_view(request): # aqui é recebido o request do usuário, e é retornado a resposta para o usuário.
@@ -18,9 +18,12 @@ def cars_view(request): # aqui é recebido o request do usuário, e é retornado
 
 def new_cars_view(request):
     if request.method == 'POST': # aqui é verificado se o método da requisição é POST, caso seja, é criado um objeto da classe CarForm, que é responsável por criar o formulário de cadastro de carros, e é armazenado na variável new_car_form.
-        new_car_form = CarForm(request.POST, request.FILES) # aqui é criado um objeto da classe CarForm, que é responsável por criar o formulário de cadastro de carros, e é armazenado na variável new_car_form.
+        new_car_form = CarModelForm(request.POST, request.FILES) # aqui é criado um objeto da classe CarForm, que é responsável por criar o formulário de cadastro de carros, e é armazenado na variável new_car_form.
+        if new_car_form.is_valid(): # aqui é verificado se o formulário de cadastro de carros é válido, caso seja, é criado um objeto da classe Car, que é responsável por criar um novo carro no banco de dados, e é armazenado na variável new_car.
+            new_car_form.save() # aqui é chamado o método save do objeto new_car_form, que é responsável por salvar o novo carro no banco de dados.
+            return redirect ('cars_list') # aqui é feito um redirecionamento para a página de listagem de carros, caso o formulário de cadastro de carros seja válido e o novo carro seja salvo no banco de dados.
     else:
-        new_car_form = CarForm() # aqui é criado um objeto da classe CarForm, que é responsável por criar o formulário de cadastro de carros, e é armazenado na variável new_car_form.
+        new_car_form = CarModelForm()
 
     return render(
         request,
