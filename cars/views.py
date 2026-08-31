@@ -13,7 +13,7 @@ def cars_view(request): # aqui é recebido o request do usuário, e é retornado
     return render(
         request, #primeiro parâmetro que o render precisa receber é o request do usuário, que é recebido como parâmetro da função.
         'cars.html', #logo após o request, é necessário informar o nome do arquivo html que será renderizado, nesse caso, o arquivo cars.html.r 'Example Model'.
-        { 'cars': cars }
+        { 'cars': cars } # o que acontece aqui é que o render vai pegar o arquivo cars.html e vai passar para ele o dicionário cars, que contém todos os carros que foram buscados no banco de dados, e vai renderizar o arquivo html com os carros que foram buscados no banco de dados.
     )
 
 def new_cars_view(request):
