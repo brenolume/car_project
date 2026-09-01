@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings 
 from django.conf.urls.static import static # precisa ser importado para que seja possível usar imagens no projeto, caso contrário não será possível fazer upload de imagens para o banco de dados.
-from cars.views import cars_view, new_cars_view
+from cars.views import CarsListView, NewCarsCreateView, CarDetailView, CarUpdateView, CarDeleteView
 from accounts.views import register_view, login_view, logout_view
 
 
@@ -10,7 +10,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
-    path('cars/', cars_view, name='cars_list'), # aqui é definido o caminho para a página de carros, que será acessada através do endereço /cars/ no navegador, puxando a função cars_view do arquivo views.py, que é responsável por retornar a resposta para o usuário.
-    path('new_car/', new_cars_view, name='new_car'), # aqui é definido o caminho para a página de novos carros, que será acessada através do endereço /new_cars/ no navegador, puxando a função new_cars_view do arquivo views.py, que é responsável por retornar a resposta para o usuário.
-    path('logout/', logout_view, name='logout')
+    path('cars/', CarsListView.as_view(), name='cars_list'), # aqui é definido o caminho para a página de carros, que será acessada através do endereço /cars/ no navegador, puxando a função cars_view do arquivo views.py, que é responsável por retornar a resposta para o usuário.
+    path('new_car/', NewCarsCreateView.as_view(), name='new_car'), # aqui é definido o caminho para a página de novos carros, que será acessada através do endereço /new_cars/ no navegador, puxando a função new_cars_view do arquivo views.py, que é responsável por retornar a resposta para o usuário.
+    path('logout/', logout_view, name='logout'),
+    path('car/<int:pk>/', CarDetailView.as_view(), name='car_detail'),
+    path('car/<int:pk>/update/', CarUpdateView.as_view(), name='car_update'),
+    path('car/<int:pk>/delete/', CarDeleteView.as_view(), name='car_delete'),
  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # aqui é adicionado o caminho para as imagens, para que seja possível fazer 
