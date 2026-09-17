@@ -12,9 +12,11 @@
     }
 
     .car-card {
-      background-color: #e3e1e1;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      border-radius: 14px;
       overflow: hidden;
       text-align: center;
       transition: all 0.3s ease;
@@ -22,8 +24,8 @@
 
     .car-card:hover {
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        transform: translateY(-2px);
+        border-color: var(--raasch-gold);
+        transform: translateY(-4px);
     }
 
     .car-card img {
@@ -41,11 +43,17 @@
     .car-card h2 {
       font-size: 1.5rem;
       margin: 10px;
+      color: #fff;
     }
 
     .car-card p {
       font-size: 1rem;
       margin-bottom: 10px;
+      color: var(--text-soft);
+    }
+
+    .no-photo, .no-results {
+      color: var(--text-soft);
     }
 
     @media (max-width: 768px) {
@@ -66,40 +74,46 @@
     input[type="text"] {
         padding: 10px;
         font-size: 16px;
-        border: 2px solid #e3e1e1;
-        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        color: #fff;
         margin-right: 10px;
-        transition: border-bottom-color 0.3s ease-in-out;
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    input[type="text"]::placeholder {
+        color: rgba(255, 255, 255, 0.45);
     }
 
     input[type="text"]:focus {
         outline: none;
-        border-bottom-color: #e3e1e1;
+        border-color: var(--raasch-gold);
     }
 
     button[type="submit"] {
-        background-color: #0096c7;
+        background: linear-gradient(to right, var(--raasch-blue), var(--raasch-blue-dark));
         color: #fff;
         border: none;
         padding: 10px 20px;
         font-size: 16px;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
+        transition: transform 0.2s ease-in-out;
     }
 
     button[type="submit"]:hover {
-        background-color: #108eb8;
+        transform: translateY(-2px);
     }
 
     a {
       font-size: 18px;
-      color: #333;
+      color: #fff;
       text-decoration: none;
     }
 
     a:hover {
-      color: #0096c7;
+      color: var(--raasch-gold);
     }
   </style>
 

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings 
 from django.conf.urls.static import static # precisa ser importado para que seja possível usar imagens no projeto, caso contrário não será possível fazer upload de imagens para o banco de dados.
-from cars.views import CarsListView, NewCarsCreateView, CarDetailView, CarUpdateView, CarDeleteView
+from cars.views import StartView, CarsListView, NewCarsCreateView, CarDetailView, CarUpdateView, CarDeleteView
 from accounts.views import register_view, login_view, logout_view
 
 
@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
+    path('start/', StartView.as_view(), name='start'), # aqui é definido o caminho para a página inicial, que será acessada através do endereço / no navegador, puxando a função cars_view do arquivo views.py, que é responsável por retornar a resposta para o usuário.
     path('cars/', CarsListView.as_view(), name='cars_list'), # aqui é definido o caminho para a página de carros, que será acessada através do endereço /cars/ no navegador, puxando a função cars_view do arquivo views.py, que é responsável por retornar a resposta para o usuário.
     path('new_car/', NewCarsCreateView.as_view(), name='new_car'), # aqui é definido o caminho para a página de novos carros, que será acessada através do endereço /new_cars/ no navegador, puxando a função new_cars_view do arquivo views.py, que é responsável por retornar a resposta para o usuário.
     path('logout/', logout_view, name='logout'),

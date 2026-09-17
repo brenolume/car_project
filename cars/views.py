@@ -7,6 +7,12 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 # class based views (CBVs)
+class StartView(ListView):
+    model = Car
+    template_name = 'start.html'
+    context_object_name = 'cars'
+
+
 class CarsListView(ListView): 
     model = Car
     template_name = 'cars.html'

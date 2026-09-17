@@ -1,13 +1,123 @@
 {% extends 'base.html' %}
 
+{% block title %}Login{% endblock %}
+
 {% block content %}
-    <form method="post"> 
-        {% csrf_token %}
+<style>
+    .auth-wrap {
+        display: flex;
+        justify-content: center;
+        padding: 80px 20px;
+    }
 
-        <table>
-            {{login_form.as_table}}
-        </table>
+    .auth-card {
+        width: 100%;
+        max-width: 380px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 36px 32px;
+    }
 
-        <input type="submit" value="Login">
-    </form>
+    .auth-card h1 {
+        color: #fff;
+        font-size: 24px;
+        font-weight: 800;
+        text-align: center;
+        margin: 0 0 28px 0;
+    }
+
+    .auth-card table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .auth-card th {
+        text-align: left;
+        color: var(--text-soft);
+        font-weight: 600;
+        font-size: 14px;
+        padding-bottom: 6px;
+        padding-top: 14px;
+    }
+
+    .auth-card td {
+        padding-bottom: 4px;
+    }
+
+    .auth-card input[type="text"],
+    .auth-card input[type="password"] {
+        width: 100%;
+        box-sizing: border-box;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        padding: 10px 12px;
+        color: #fff;
+        font-size: 15px;
+    }
+
+    .auth-card input[type="text"]:focus,
+    .auth-card input[type="password"]:focus {
+        outline: none;
+        border-color: var(--raasch-gold);
+    }
+
+    .auth-card .errorlist {
+        color: #ff8a8a;
+        font-size: 13px;
+        margin: 4px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .auth-card input[type="submit"] {
+        width: 100%;
+        margin-top: 22px;
+        background: linear-gradient(to right, var(--raasch-blue), var(--raasch-blue-dark));
+        color: #fff;
+        border: none;
+        padding: 13px 20px;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .auth-card input[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 150, 199, 0.4);
+    }
+
+    .auth-card .switch-link {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--text-soft);
+    }
+
+    .auth-card .switch-link a {
+        color: var(--raasch-gold);
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <h1>Entrar</h1>
+        <form method="post">
+            {% csrf_token %}
+
+            <table>
+                {{ login_form.as_table }}
+            </table>
+
+            <input type="submit" value="Login">
+        </form>
+        <div class="switch-link">Ainda não tem uma conta? <a href="{% url 'register' %}">Cadastre-se</a></div>
+    </div>
+</div>
 {% endblock %}

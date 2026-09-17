@@ -3,21 +3,17 @@
 {% block content %}
   <style>
     .car-card {
-      background-color: #e3e1e1;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      border-radius: 14px;
       overflow: hidden;
       text-align: center;
-      transition: all 0.3s ease;
+      color: #fff;
       max-width: 500px;
       margin: 20px auto 0;
       margin-bottom: 20px;
-    }
-
-    .car-card:hover {
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      transform: translateY(-2px);
     }
 
     .car-card img {
@@ -29,11 +25,17 @@
     .car-card h2 {
       font-size: 1.5rem;
       margin: 10px;
+      color: #fff;
     }
 
     .car-card p {
       font-size: 1rem;
       margin-bottom: 10px;
+      color: var(--text-soft);
+    }
+
+    .car-card p strong {
+      color: #fff;
     }
 
     .buttons-container {
@@ -45,28 +47,28 @@
 
     .btn {
       display: inline-block;
-      background-color: #0096c7;
+      background: linear-gradient(to right, var(--raasch-blue), var(--raasch-blue-dark));
       color: #fff;
       border: none;
       padding: 10px 20px;
       font-size: 16px;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
+      transition: transform 0.2s ease-in-out;
       margin: 0 10px;
     }
 
     .btn:hover {
-      background-color: #108eb8;
+      transform: translateY(-2px);
     }
 
     .btn-danger {
-      background-color: #d9534f;
+      background: #d9534f;
       text-decoration: none !important;
     }
 
     .btn-danger:hover {
-      background-color: #d2221c;
+      background: #d2221c;
     }
 
     .error-message {

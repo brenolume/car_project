@@ -4,30 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{% endblock %}</title>
+  <link rel="icon" type="image/jpeg" href="/media/cars/raasch.jpg">
+
   <style>
+    :root {
+        --raasch-black: #05070a;
+        --raasch-navy: #0a1622;
+        --raasch-blue: #00b4d8;
+        --raasch-blue-dark: #0096c7;
+        --raasch-gold: #e8b84b;
+        --glass-bg: rgba(255, 255, 255, 0.06);
+        --glass-bg-strong: rgba(255, 255, 255, 0.09);
+        --glass-border: rgba(255, 255, 255, 0.14);
+        --text-soft: rgba(255, 255, 255, 0.7);
+    }
+
     body {
         font-family: 'Open Sans', sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
+        background: radial-gradient(circle at 50% 0%, #0d2233 0%, var(--raasch-navy) 45%, var(--raasch-black) 100%);
+        color: #fff;
         margin: 0;
         padding: 0;
+        position: relative;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/media/cars/raasch.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 45%;
+        opacity: 0.12;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    header, main, footer {
+        position: relative;
+        z-index: 1;
     }
 
     header {
-        background-color: #0096c7;
+        background: rgba(5, 7, 10, 0.55);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--glass-border);
         color: #fff;
         text-align: center;
     }
 
     footer {
-        background-color: #fff700;
-        color: #000;
+        background: rgba(5, 7, 10, 0.55);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--glass-border);
+        color: var(--text-soft);
         padding: 20px;
         text-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+    }
+
+    main {
+        padding-bottom: 70px;
     }
 
     nav {
-        background-color: #0096c7;
+        background-color: transparent;
         color: #fff;
         height: 50px;
         display: flex;
@@ -55,15 +104,17 @@
     }
 
     nav ul li a:hover {
-        background-color: #32bbe8;
+        background-color: rgba(232, 184, 75, 0.18);
+        color: var(--raasch-gold);
     }
 
     nav ul li.active a {
-        background-color: #666;
+        background-color: rgba(232, 184, 75, 0.18);
+        color: var(--raasch-gold);
     }
 
     nav ul li.active a:hover {
-        background-color: #999;
+        background-color: rgba(232, 184, 75, 0.28);
     }
 
   </style>
@@ -73,15 +124,19 @@
     <nav>
       <ul>
         {% if user.is_authenticated %}
-         <li>Olá, {{ user.username}}!</li>
-         <li><a href="{% url 'cars_list' %}">Início</a></li>
+         <li><a href="{% url 'start' %}">Início</a></li>
+         <li><a href="{% url 'cars_list' %}">Carros Disponíveis</a></li>
          <li><a href="{% url 'new_car' %}">Cadastrar Carros</a></li>
-         <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% endif %}
-
-        {% if not user.is_authenticated %}
-         <li><a href="{% url 'cars_list' %}">Início</a></li>
+        {% else %}
+         <li><a href="{% url 'start' %}">Início</a></li>
          <li><a href="{% url 'register' %}">Cadastrar-se</a></li>
+        {% endif %}
+      </ul>
+      <ul>
+        {% if user.is_authenticated %}
+         <li>Olá, {{ user.username }}!</li>
+         <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
          <li><a href="{% url 'login' %}">Login</a></li>
         {% endif %}
       </ul>

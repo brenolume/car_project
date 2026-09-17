@@ -1,13 +1,95 @@
 {% extends 'base.html' %}
 
+{% block title %}Cadastrar Carro{% endblock %}
+
 {% block content %}
+  <style>
+    form {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 28px 30px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+    }
+
+    form h1 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    th, td {
+      padding: 4px;
+      text-align: left;
+      border-bottom: 1px solid var(--glass-border);
+      color: var(--text-soft);
+    }
+
+    th {
+      background-color: transparent;
+      font-weight: 600;
+    }
+
+    input[type="text"], input[type="number"], select, textarea {
+      padding: 8px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+      color: #fff;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 8px;
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--raasch-gold);
+    }
+
+    select option {
+      background: var(--raasch-navy);
+      color: #fff;
+    }
+
+    input[type="submit"] {
+      display: block;
+      margin: 20px auto 0;
+      background: linear-gradient(to right, var(--raasch-blue), var(--raasch-blue-dark));
+      color: #fff;
+      border: none;
+      padding: 10px 26px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    input[type="submit"]:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <h1>Cadastrar Carro</h1>
         <table>
-            {{ form.as_table }} 
+            {{ form.as_table }}
         </table>
 
         <input type="submit" value="Cadastrar" class="btn btn-primary">
-    
+
     </form>
 {% endblock %}

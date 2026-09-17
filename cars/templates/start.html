@@ -1,0 +1,504 @@
+{% extends 'base.html' %}
+
+{% block title %}Início{% endblock %}
+
+{% block content %}
+<style>
+    .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+        text-align: center;
+        padding: 80px 20px 60px 20px;
+    }
+
+    .hero .badge {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--raasch-gold);
+        box-shadow: 0 0 24px rgba(232, 184, 75, 0.35);
+        margin-bottom: 24px;
+    }
+
+    .hero .eyebrow {
+        color: var(--raasch-gold);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+    }
+
+    .hero h1 {
+        color: #fff;
+        font-size: 46px;
+        font-weight: 800;
+        margin: 0 0 20px 0;
+        line-height: 1.25;
+    }
+
+    .hero h1 span {
+        background: linear-gradient(to right, var(--raasch-blue), var(--raasch-gold));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .hero p.lead {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 18px;
+        max-width: 560px;
+        margin: 0 auto 36px auto;
+        line-height: 1.6;
+    }
+
+    .welcome-pill {
+        display: inline-block;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        color: #fff;
+        font-size: 14px;
+        padding: 8px 20px;
+        border-radius: 30px;
+        margin-bottom: 22px;
+    }
+
+    .welcome-pill strong {
+        color: var(--raasch-gold);
+    }
+
+    .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    .cta {
+        display: inline-block;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 15px 38px;
+        border-radius: 30px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-primary {
+        background: linear-gradient(to right, var(--raasch-blue), var(--raasch-blue-dark));
+        color: #fff;
+        box-shadow: 0 8px 24px rgba(0, 150, 199, 0.4);
+    }
+
+    .cta-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 150, 199, 0.5);
+    }
+
+    .cta-ghost {
+        background: var(--glass-bg);
+        color: #fff;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+    }
+
+    .cta-ghost:hover {
+        border-color: var(--raasch-gold);
+        color: var(--raasch-gold);
+        transform: translateY(-3px);
+    }
+
+    /* Stats */
+    .stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+        margin: 10px auto 70px auto;
+    }
+
+    .stat-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        padding: 22px 30px;
+        min-width: 160px;
+        text-align: center;
+    }
+
+    .stat-card .number {
+        color: var(--raasch-gold);
+        font-size: 30px;
+        font-weight: 800;
+        display: block;
+    }
+
+    .stat-card .label {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px;
+        margin-top: 6px;
+    }
+
+    /* Section titles */
+    .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .section-title .eyebrow {
+        color: var(--raasch-gold);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .section-title h2 {
+        color: #fff;
+        font-size: 30px;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    section.block {
+        padding: 60px 0;
+        border-top: 1px solid var(--glass-border);
+    }
+
+    /* Features */
+    .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 22px;
+    }
+
+    .feature-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 30px 26px;
+        width: 230px;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--raasch-gold);
+    }
+
+    .feature-card .icon {
+        font-size: 26px;
+        margin-bottom: 14px;
+    }
+
+    .feature-card h3 {
+        color: #fff;
+        font-size: 17px;
+        margin: 0 0 8px 0;
+    }
+
+    .feature-card p {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 14px;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    /* Steps */
+    .steps {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 22px;
+    }
+
+    .step-card {
+        flex: 1;
+        min-width: 200px;
+        max-width: 260px;
+        text-align: center;
+    }
+
+    .step-card .step-number {
+        width: 44px;
+        height: 44px;
+        line-height: 44px;
+        margin: 0 auto 16px auto;
+        border-radius: 50%;
+        background: linear-gradient(to right, var(--raasch-blue), var(--raasch-gold));
+        color: var(--raasch-black);
+        font-weight: 800;
+        font-size: 17px;
+    }
+
+    .step-card h3 {
+        color: #fff;
+        font-size: 16px;
+        margin: 0 0 8px 0;
+    }
+
+    .step-card p {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Featured cars */
+    .showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 22px;
+    }
+
+    .showcase-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        overflow: hidden;
+        text-decoration: none;
+        display: block;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .showcase-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--raasch-gold);
+    }
+
+    .showcase-card .photo {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        display: block;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .showcase-card .info {
+        padding: 16px 18px;
+    }
+
+    .showcase-card .info h3 {
+        color: #fff;
+        font-size: 16px;
+        margin: 0 0 4px 0;
+    }
+
+    .showcase-card .info .year {
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .showcase-card .info .price {
+        color: var(--raasch-gold);
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    .showcase-empty {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 15px;
+    }
+
+    .showcase-more {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .showcase-more a {
+        color: var(--raasch-gold);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        border-bottom: 1px solid transparent;
+    }
+
+    .showcase-more a:hover {
+        border-color: var(--raasch-gold);
+    }
+
+    /* Final CTA */
+    .final-cta {
+        text-align: center;
+        padding: 70px 20px 90px 20px;
+    }
+
+    .final-cta h2 {
+        color: #fff;
+        font-size: 28px;
+        font-weight: 800;
+        margin: 0 0 14px 0;
+    }
+
+    .final-cta p {
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0 0 28px 0;
+        font-size: 16px;
+    }
+
+    .final-cta .secondary-link {
+        display: block;
+        margin-top: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 14px;
+    }
+
+    .final-cta .secondary-link a {
+        color: var(--raasch-gold);
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+
+<section class="hero wrap">
+    <img src="/media/cars/raasch.jpg" alt="Raasch Veículos" class="badge">
+    <span class="eyebrow">Raasch Multimarcas</span>
+
+    {% if user.is_authenticated %}
+        <div class="welcome-pill">Bem-vindo(a), <strong>{{ user.username }}</strong></div>
+    {% endif %}
+
+    <h1>O carro certo,<br><span>no momento certo.</span></h1>
+    <p class="lead">Veículos selecionados, procedência garantida e um atendimento pensado para você. Simplicidade e confiança em cada etapa da sua compra.</p>
+
+    <div class="cta-row">
+        {% if user.is_authenticated %}
+            <a href="{% url 'cars_list' %}" class="cta cta-primary">Ver carros disponíveis</a>
+            <a href="{% url 'new_car' %}" class="cta cta-ghost">Cadastrar um carro</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="cta cta-primary">Fazer login</a>
+            <a href="{% url 'register' %}" class="cta cta-ghost">Criar conta</a>
+        {% endif %}
+    </div>
+</section>
+
+<div class="wrap">
+    <div class="stats">
+        <div class="stat-card">
+            <span class="number">{{ cars|length }}+</span>
+            <span class="label">Veículos no estoque</span>
+        </div>
+        <div class="stat-card">
+            <span class="number">15+</span>
+            <span class="label">Anos de mercado</span>
+        </div>
+        <div class="stat-card">
+            <span class="number">100%</span>
+            <span class="label">Procedência garantida</span>
+        </div>
+    </div>
+</div>
+
+<section class="block">
+    <div class="wrap">
+        <div class="section-title">
+            <span class="eyebrow">Por que a Raasch</span>
+            <h2>Diferenciais que fazem a diferença</h2>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <div class="icon">🚗</div>
+                <h3>Variedade</h3>
+                <p>Carros de diversas marcas e modelos em um só lugar.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">✅</div>
+                <h3>Confiança</h3>
+                <p>Anúncios verificados com informações detalhadas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>Praticidade</h3>
+                <p>Encontre e negocie de forma rápida e sem burocracia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="block">
+    <div class="wrap">
+        <div class="section-title">
+            <span class="eyebrow">Como funciona</span>
+            <h2>Do interesse ao volante em 3 passos</h2>
+        </div>
+        <div class="steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Explore o estoque</h3>
+                <p>Navegue pelos carros disponíveis e filtre pelo modelo ideal para você.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Crie sua conta</h3>
+                <p>Cadastre-se em poucos segundos para acessar todos os detalhes.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Feche negócio</h3>
+                <p>Entre em contato e conduza a negociação com total transparência.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="block">
+    <div class="wrap">
+        <div class="section-title">
+            <span class="eyebrow">Vitrine</span>
+            <h2>Alguns dos nossos carros</h2>
+        </div>
+
+        {% if cars %}
+            <div class="showcase">
+                {% for car in cars|slice:":3" %}
+                    <a href="{% url 'car_detail' car.pk %}" class="showcase-card">
+                        {% if car.photo %}
+                            <img src="{{ car.photo.url }}" alt="{{ car.model }}" class="photo">
+                        {% endif %}
+                        <div class="info">
+                            <h3>{{ car.brand }} {{ car.model }}</h3>
+                            <div class="year">{{ car.model_year|default:car.factory_year }}</div>
+                            {% if car.value %}
+                                <div class="price">R$ {{ car.value|floatformat:2 }}</div>
+                            {% endif %}
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="showcase-more">
+                <a href="{% url 'cars_list' %}">Ver todos os carros disponíveis →</a>
+            </div>
+        {% else %}
+            <p class="showcase-empty">Em breve novos veículos serão adicionados ao nosso estoque.</p>
+        {% endif %}
+    </div>
+</section>
+
+<section class="final-cta wrap">
+    {% if user.is_authenticated %}
+        <h2>Pronto para encontrar seu próximo carro?</h2>
+        <p>Acesse agora a lista completa de veículos disponíveis.</p>
+        <a href="{% url 'cars_list' %}" class="cta cta-primary">Ver carros disponíveis</a>
+    {% else %}
+        <h2>Pronto para começar?</h2>
+        <p>Faça login para acessar todos os veículos disponíveis em nosso estoque.</p>
+        <a href="{% url 'login' %}" class="cta cta-primary">Fazer login</a>
+        <div class="secondary-link">Ainda não tem uma conta? <a href="{% url 'register' %}">Cadastre-se</a></div>
+    {% endif %}
+</section>
+{% endblock %}
